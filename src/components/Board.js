@@ -1,38 +1,70 @@
 import React from "react";
 import Square from "./Square";
 
+function whoIsWinner(squares) {
+  const lines = [
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+    const [firstIndex, secondIndex, thirdIndex] = lines[lineIndex];
+    const firstSquare = squares[firstIndex];
+    const secondSquare = squares[secondIndex];
+    const thirdSquare = squares[thirdIndex];
+
+    if (
+      squares[firstIndex] === secondSquare &&
+      secondSquare === thirdSquare &&
+      firstSquare !== null
+    ) {
+      return firstSquare;
+    }
+  }
+  return null;
+}
+//   return firstSquare;
+
 export default function Board() {
   const [squares, setSquares] = React.useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = React.useState(true);
 
   // const [nextPlayer, setNextPlayer] = React.useState(true);
 
-  const status = "Next player: " + (xIsNext ? "X" : "O");
+  // let status = "Next player: " + (xIsNext ? "X" : "O");
+
+  // if (whoIsWinner(squares)) {
+  //   status = "Winner is " + (xIsNext ? "X" : "O");
+  // }
+
+  // if (whoIsWinner(squares)) {
+  //   alert("Winner!!!");
+  // }
+
+  const nextPlayer = xIsNext ? "X" : "O";
+  const winner = whoIsWinner(squares);
+  const status = winner ? `Winner is ${winner}` : `Next player: ${nextPlayer}`;
 
   // ODER
 
   // const player = xIsNext ? "X" : "O";
   // const status = `Next player: ${player}`;
 
+  ///////////////
+
   // function handleClick(squareIndex) {
   //   const squaresCopy = squares.slice();
-  //   squaresCopy[squareIndex] = player;
+  //   if (squaresCopy[squareIndex]) {
+  //     return;
+  //   }
   //   setXIsNext(!xIsNext);
   //   setSquares(squaresCopy);
-  // }
-
-  //////////
-  // const [status1, setStatus] = React.useState(true);
-
-  // function changeStatusByHandleClick(status) {
-  //   const status2 = status.slice();
-  //   if (status) {
-  //     status = status1;
-  //   } else {
-  //     status = status2;
-  //   }
-  //   status(!status);
-  //   setStatus(status2);
   // }
 
   function handleClick(squareIndex) {
@@ -46,13 +78,6 @@ export default function Board() {
     setXIsNext(!xIsNext);
     setSquares(squaresCopy);
   }
-
-  // const squaresCopyNum2 = squares.slice();
-  // squaresCopyNum2[squareIndex] = "O";
-
-  // if (squaresCopy[squareIndex] === "X") {
-  //   squaresCopy[squareIndex] = squaresCopyNum2[squareIndex];
-  // }
 
   return (
     <div>

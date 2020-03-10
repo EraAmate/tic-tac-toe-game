@@ -3,14 +3,56 @@ import Square from "./Square";
 
 export default function Board() {
   const [squares, setSquares] = React.useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = React.useState(true);
 
-  const status = "Next player: X";
+  // const [nextPlayer, setNextPlayer] = React.useState(true);
+
+  const status = "Next player: " + (xIsNext ? "X" : "O");
+
+  // ODER
+
+  // const player = xIsNext ? "X" : "O";
+  // const status = `Next player: ${player}`;
+
+  // function handleClick(squareIndex) {
+  //   const squaresCopy = squares.slice();
+  //   squaresCopy[squareIndex] = player;
+  //   setXIsNext(!xIsNext);
+  //   setSquares(squaresCopy);
+  // }
+
+  // const [status1, setStatus] = React.useState(true);
+
+  // function changeStatusByHandleClick(status) {
+  //   const status2 = status.slice();
+  //   if (status) {
+  //     status = status1;
+  //   } else {
+  //     status = status2;
+  //   }
+  //   status(!status);
+  //   setStatus(status2);
+  // }
 
   function handleClick(squareIndex) {
     const squaresCopy = squares.slice();
-    squaresCopy[squareIndex] = "X";
+    //  DIES IST SCHÖNER : squareCopy[squareIndex] =  XisNext ? "X" : "O"
+    if (xIsNext) {
+      squaresCopy[squareIndex] = "X";
+    } else {
+      squaresCopy[squareIndex] = "O";
+    }
+    setXIsNext(!xIsNext);
     setSquares(squaresCopy);
   }
+
+  // const squaresCopyNum2 = squares.slice();
+  // squaresCopyNum2[squareIndex] = "O";
+
+  // if (squaresCopy[squareIndex] === "X") {
+  //   squaresCopy[squareIndex] = squaresCopyNum2[squareIndex];
+  // }
+
   return (
     <div>
       <div className="status">{status}</div>

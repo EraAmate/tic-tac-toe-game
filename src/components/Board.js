@@ -21,6 +21,7 @@ export default function Board() {
   //   setSquares(squaresCopy);
   // }
 
+  //////////
   // const [status1, setStatus] = React.useState(true);
 
   // function changeStatusByHandleClick(status) {
